@@ -6,7 +6,7 @@
 
 - name: Install required system packages 
   apt: name={{ item }} state=latest update_cache=yes
-  loop: [ 'apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'python3-pip', 'virtualenv', 'python3-setuptools']
+  loop: [ 'apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'python3-pip', 'python3-setuptools']
 
 - name: Add Docker GPG apt key 
   apt_key:
@@ -35,8 +35,8 @@
     name: "blockchain-python"
     image: "awazanak/blockchain-python"
     ports:
-     - "11000:5000"
+     - "5000:5000"
     env:
       SECRET_KEY: ssssh
-    state: present
+    state: started
     restart: yes

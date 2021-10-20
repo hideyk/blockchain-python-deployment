@@ -16,19 +16,19 @@ variable "key_pair" {
 }
 
 variable "worker_ami" {
-    description = "AMI for Web instances"
+    description = "AMI for Worker instances"
     type = string
     default = "ami-0d058fe428540cd89"
 }
 
 variable "worker_instance_type" {
-    description = "Instance type for Web instances"
+    description = "Instance type for Worker instances"
     type = string
     default = "t3.micro"
 }
 
 variable "worker_hostname" {
-    description = "Hostname for Web instances"
+    description = "Hostname for Worker instances"
     type = string
     default = "hidey-blockchain-node"
 }
