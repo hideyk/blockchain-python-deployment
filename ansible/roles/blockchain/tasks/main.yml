@@ -1,0 +1,42 @@
+---
+- name: Update & upgrade apt cache
+  apt:
+    update_cache: yes
+    upgrade: full
+
+- name: Install required system packages 
+  apt: name={{ item }} state=latest update_cache=yes
+  loop: [ 'apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'python3-pip', 'virtualenv', 'python3-setuptools']
+
+- name: Add Docker GPG apt key 
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: Add Docker Repository
+  apt_repository:
+    repo: deb https://download.docker.com/linux/ubuntu focal stable
+    state: present
+
+- name: Update apt and install docker-ce
+  apt: update_cache=yes name=docker-ce state=latest
+
+- name: Install Docker Module for Python
+  pip:
+    name: docker
+
+- name: Pull blockchain-python Docker image
+  docker_image:
+    name: "awazanak/blockchain-python"
+    source: pull
+
+- name: Create blockchain worker container
+  docker_container:
+    name: "blockchain-python"
+    image: "awazanak/blockchain-python"
+    ports:
+     - "11000:5000"
+    env:
+      SECRET_KEY: ssssh
+    state: present
+    restart: yes

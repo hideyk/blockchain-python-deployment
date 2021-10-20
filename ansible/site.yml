@@ -1,0 +1,26 @@
+---
+# - hosts: load_balancer
+#   become: yes
+#   tasks:
+#     - name: Restrict permissions of alation-keypair.pem
+#       file:
+#         path: /home/ubuntu/alation/ansible/alation-keypair.pem
+#         mode: '0600'
+
+# - hosts: web
+#   become: yes
+#   vars:
+#     ansible_ssh_private_key_file: ./alation-keypair.pem
+#     ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
+#   tasks:
+#     - name: Copy customised nginx index.html file to default folder /usr/share/nginx/html
+#       copy:
+#         src: ./nginx-index.html
+#         dest: /usr/share/nginx/html/index.html
+#         mode: '0644'
+
+
+- hosts: worker_node
+  become: yes
+  roles:
+    - blockchain
