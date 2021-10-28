@@ -1,4 +1,4 @@
-# *.pem
+*.pem
 # *.ppk
 *.terraform*
 *.tfstate*
